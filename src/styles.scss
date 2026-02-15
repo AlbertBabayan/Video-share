@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  background: #15213B;
+
+  .cdk-overlay-container {
+    .element {
+      width: 100%;
+      padding: 5px 30px;
+      background: #f4f4ff;
+      border: 1px solid darkblue;
+      border-radius: 10%;
+    }
+  }
+}
