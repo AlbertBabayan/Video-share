@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  background: #2E354E;
+  height: 60px;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 200px;
+    width: 100%;
+
+    .title {
+      color: #879BF4;
+      font-size: 30px;
+
+      .title-name {
+      }
+    }
+
+    .action {
+      display: flex;
+      gap: 15px;
+
+      .action-info-button {
+        border: none;
+        background: none;
+        padding: 0;
+        color: #879BF4;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .action-info-button:hover {
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="inner">
+    <div cdkDropListGroup class="element-list-container">
+      <div class="element-container">
+        <div
+          cdkDropList
+          [cdkDropListData]="elements()"
+          class="example-list"
+          (cdkDropListDropped)="currentItem($event)">
+          @for (item of elements(); track item) {
+            <div class="cdkDrag" cdkDrag>
+              <div class="url">
+                <div class="example-box">
+                  <video class="play" controls>
+                    <source [src]=item.value type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div>
+                {{ item.name }}
+              </div>
+              <div>
+                {{ item.id }}
+              </div>
+              <div>
+                {{ item.verId }}
+              </div>
+              <div class="action-container">
+                <div class="action">
+                  <ng-template
+                    cdkConnectedOverlay
+                    [cdkConnectedOverlayOrigin]="trigger"
+                    [cdkConnectedOverlayOpen]="this.isOpen()"
+                  >
+                    <div class="element">
+                      <div>Item 1</div>
+                      <div>Item 2</div>
+                      <div>Item 3</div>
+                    </div>
+                  </ng-template>
+                  <div class="edit">
+                    <button (click)="edit()" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+                      {{ this.isOpen() ? "Close" : "Open" }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+      <div class="element-container">
+        <div
+          cdkDropList
+          [cdkDropListData]="receivedData()"
+          class="example-list"
+          (cdkDropListDropped)="currentItem($event)">
+          @for (item of receivedData(); track item) {
+            <div class="cdkDrag" cdkDrag>
+              <div class="url">
+                <div class="example-box">
+                  <video class="play" controls>
+                    <source [src]=item.value type="video/mp4">
+                  </video>
+                </div>
+              </div>
+              <div>
+                {{ item.id }}
+              </div>
+              <div>
+                {{ item.name }}
+              </div>
+              <div>
+                {{ item.verId }}
+              </div>
+              <div class="action-container">
+              <div class="action">
+                <ng-template
+                  cdkConnectedOverlay
+                  [cdkConnectedOverlayOrigin]="trigger"
+                  [cdkConnectedOverlayOpen]="this.isOpen()"
+                >
+                  <div class="element">
+                    <div>1</div>
+                    <div>1</div>
+                    <div>1</div>
+                  </div>
+                </ng-template>
+                <div class="edit">
+                  <button (click)="edit()" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
+                    {{ this.isOpen() ? "Close" : "Open" }}
+                  </button>
+                </div>
+              </div>
+              </div>
+
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

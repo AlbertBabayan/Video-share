@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="inner">
+    <div class="action">
+      <button class="action-info-button" type="button" (click)="myFileInput.click()">Upload Videos</button>
+      <input #myFileInput class="upload-input" type='file' (change)="onSelectFile($event)">
+      <button class="action-info-button" type="button" >Recent Uploads</button>
+    </div>
+    <div class="videos">
+      <app-videos></app-videos>
+    </div>
+  </div>
+</div>
+
