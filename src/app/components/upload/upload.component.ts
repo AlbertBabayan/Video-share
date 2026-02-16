@@ -2,7 +2,7 @@ import {Component, DestroyRef, ElementRef, inject, OnInit, signal, ViewChild} fr
 import {VideoDataService} from '../../services/video-data.service';
 import {VideosComponent} from '../videos/videos.component';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
-import {elements} from '../../Mock/elementValue';
+import {elements} from '../../Mock/element-value';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {of} from 'rxjs';
 
@@ -40,14 +40,15 @@ export class UploadComponent implements OnInit{
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
+        console.log(reader)
         if (reader.result) {
           this.videos.update(() => {
             return this.elements()!.map(item => {
               return {
-                position: item.id,
-                weight: item.verId,
+                id: item.id,
+                verId: item.verId,
                 name: item.name,
-                value: reader.result,
+                video: reader.result,
               }
             });
           });

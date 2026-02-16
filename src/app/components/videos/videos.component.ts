@@ -13,7 +13,7 @@ import {VideoDataService} from '../../services/video-data.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {elements} from '../../Mock/elementValue';
+import {elements} from '../../Mock/element-value';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
 import {CdkConnectedOverlay, CdkOverlayOrigin, OverlayModule} from '@angular/cdk/overlay';
 import { Overlay } from '@angular/cdk/overlay';
@@ -38,10 +38,11 @@ export class VideosComponent implements OnInit {
   @ContentChild('content') content: TemplateRef<any>;
   private dataTransferService = inject(VideoDataService);
   private overlay  = inject(Overlay);
-  public all = computed(() => elements.concat(this.receivedData()));
+  // public all = computed(() => elements.concat(this.receivedData()));
   public receivedData = signal<IElement[]>([]);
   public isOpen = signal(false);
-  public elements = signal<IElement[]>(this.receivedData());
+  // public elements = signal<IElement[]>(this.receivedData());
+  public elements = computed<IElement[]>(() => this.receivedData());
 
 
   ngOnInit(): void {
@@ -82,7 +83,7 @@ private getLocation() {
       );
     }
   }
-  public sendALl(){
-    return this.all();
-  }
+  // public sendALl(){
+  //   return this.all();
+  // }
 }
