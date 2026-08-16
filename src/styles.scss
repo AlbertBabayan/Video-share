@@ -2,13 +2,34 @@ body {
   margin: 0;
   background: #15213B;
 
-  .cdk-overlay-container {
-    .element {
+  .draggable-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    gap: 5px;
+    border: 1px solid #879bf4;
+
+    .record {
       width: 100%;
-      padding: 5px 30px;
-      background: #f4f4ff;
-      border: 1px solid darkblue;
-      border-radius: 10%;
+      height: 137px;
+    }
+
+    .action-container {
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
     }
   }
+
+  .cdk-drag-placeholder {
+    opacity: 0.3;
+  }
+
+  //.mat-mdc-form-field-subscript-wrapper {
+  //  display: none;
+  //}
+  //.mdc-floating-label, .mdc-floating-label--float-above {
+  //  font-size: 14px;
+  //}
 }

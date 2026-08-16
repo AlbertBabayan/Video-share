@@ -1,0 +1,13 @@
+@if (showModal()) {
+  <div class="container">
+    <div class="content">
+      <div class="element">
+        <ng-container *ngTemplateOutlet="content">
+        </ng-container>
+      </div>
+      <div class="action">
+        <button class="close" (click)="triggerModal()">Close</button>
+      </div>
+    </div>
+  </div>
+}

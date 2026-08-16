@@ -1,6 +1,6 @@
 export interface IElement {
-  id?: number,
-  verId?: number,
-  name?: string,
+  id: number,
+  name: string,
+  username: number,
   video: string | ArrayBuffer | null;
 }

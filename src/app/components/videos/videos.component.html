@@ -1,49 +1,35 @@
 <div class="container">
   <div class="inner">
-    <div cdkDropListGroup class="element-list-container">
+    <div cdkDropListGroup class="elements-list-container">
       <div class="element-container">
         <div
           cdkDropList
+          #todoElements="cdkDropList"
           [cdkDropListData]="elements()"
-          class="example-list"
-          (cdkDropListDropped)="currentItem($event)">
+          [cdkDropListConnectedTo]="[itemsList]"
+          class="elements-list"
+          (cdkDropListDropped)="dropItem($event)">
           @for (item of elements(); track item) {
-            <div class="cdkDrag" cdkDrag>
-              <div class="url">
-                <div class="example-box">
-                  <video class="play" controls>
+            <div class="draggable-item" cdkDrag>
+              <div>
+                <div>
+                  <video class="record" controls>
                     <source [src]=item.video type="video/mp4">
                   </video>
                 </div>
               </div>
               <div>
-                {{ item.name }}
-              </div>
-              <div>
                 {{ item.id }}
               </div>
               <div>
-                {{ item.verId }}
+                {{ item.name }}
+              </div>
+              <div>
+                {{ item.username }}
               </div>
               <div class="action-container">
-                <div class="action">
-                  <ng-template
-                    cdkConnectedOverlay
-                    [cdkConnectedOverlayOrigin]="trigger"
-                    [cdkConnectedOverlayOpen]="this.isOpen()"
-                  >
-                    <div class="element">
-                      <div>Item 1</div>
-                      <div>Item 2</div>
-                      <div>Item 3</div>
-                    </div>
-                  </ng-template>
-                  <div class="edit">
-                    <button (click)="edit()" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-                      {{ this.isOpen() ? "Close" : "Open" }}
-                    </button>
-                  </div>
-                </div>
+                <app-element [item]="item">
+                </app-element>
               </div>
             </div>
           }
@@ -52,14 +38,16 @@
       <div class="element-container">
         <div
           cdkDropList
-          [cdkDropListData]="receivedData()"
-          class="example-list"
-          (cdkDropListDropped)="currentItem($event)">
-          @for (item of receivedData(); track item) {
-            <div class="cdkDrag" cdkDrag>
-              <div class="url">
-                <div class="example-box">
-                  <video class="play" controls>
+          #itemsList="cdkDropList"
+          [cdkDropListData]="items()"
+          [cdkDropListConnectedTo]="[todoElements]"
+          class="elements-list"
+          (cdkDropListDropped)="dropItem($event)">
+          @for (item of items(); track item) {
+            <div class="draggable-item" cdkDrag>
+              <div>
+                <div>
+                  <video class="record" controls>
                     <source [src]=item.video type="video/mp4">
                   </video>
                 </div>
@@ -71,29 +59,12 @@
                 {{ item.name }}
               </div>
               <div>
-                {{ item.verId }}
+                {{ item.username }}
               </div>
               <div class="action-container">
-              <div class="action">
-                <ng-template
-                  cdkConnectedOverlay
-                  [cdkConnectedOverlayOrigin]="trigger"
-                  [cdkConnectedOverlayOpen]="this.isOpen()"
-                >
-                  <div class="element">
-                    <div>1</div>
-                    <div>1</div>
-                    <div>1</div>
-                  </div>
-                </ng-template>
-                <div class="edit">
-                  <button (click)="edit()" type="button" cdkOverlayOrigin #trigger="cdkOverlayOrigin">
-                    {{ this.isOpen() ? "Close" : "Open" }}
-                  </button>
-                </div>
+                <app-element [item]="item">
+                </app-element>
               </div>
-              </div>
-
             </div>
           }
         </div>

@@ -1,22 +1,11 @@
-import {
-  Component,
-  computed,
-  ContentChild,
-  ElementRef,
-  inject,
-  OnInit,
-  signal,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
+import {Component, inject, OnInit, signal} from '@angular/core';
 import {VideoDataService} from '../../services/video-data.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {elements} from '../../Mock/element-value';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
-import {CdkConnectedOverlay, CdkOverlayOrigin, OverlayModule} from '@angular/cdk/overlay';
-import { Overlay } from '@angular/cdk/overlay';
+import {OverlayModule} from '@angular/cdk/overlay';
+import {ElementComponent} from '../element/element.component';
 
 
 @Component({
@@ -26,52 +15,25 @@ import { Overlay } from '@angular/cdk/overlay';
     DragDropModule,
     MatIconModule,
     OverlayModule,
-    CdkOverlayOrigin,
-    CdkConnectedOverlay,
+    ElementComponent,
   ],
   templateUrl: './videos.component.html',
   styleUrl: './videos.component.scss'
 })
 export class VideosComponent implements OnInit {
 
-  // @ViewChild('myModal') modal: ElementRef;
-  @ContentChild('content') content: TemplateRef<any>;
   private dataTransferService = inject(VideoDataService);
-  private overlay  = inject(Overlay);
-  // public all = computed(() => elements.concat(this.receivedData()));
-  public receivedData = signal<IElement[]>([]);
-  public isOpen = signal(false);
-  // public elements = signal<IElement[]>(this.receivedData());
-  public elements = computed<IElement[]>(() => this.receivedData());
+  public elements = signal<IElement[]>([]);
+  public items = signal<IElement[]>([]);
 
 
   ngOnInit(): void {
     this.dataTransferService.currentData.subscribe(data => {
-      this.receivedData.set(data);
+      this.elements.set(data);
     });
   }
 
-private getLocation() {
-  this.overlay.position()
-    .global()
-    .centerHorizontally()
-    .centerVertically();
-  const overlayRef = this.overlay.create();
-  overlayRef.backdropClick().subscribe(() => {
-    overlayRef.dispose();
-  });
-}
-
-  public edit() {
-    this.isOpen.set(!this.isOpen());
-    this.getLocation();
-  }
-
-  // public close() {
-  //   this.modal.nativeElement.style.display = 'none';
-  // }
-
-  public currentItem(event: CdkDragDrop<IElement[]>) {
+  public dropItem(event: CdkDragDrop<IElement[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -83,7 +45,4 @@ private getLocation() {
       );
     }
   }
-  // public sendALl(){
-  //   return this.all();
-  // }
 }

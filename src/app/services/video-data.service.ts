@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, of} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {IElement} from '../infrastructure/interfaces/element.interface';
+import {elements} from '../mock/element-value';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,11 @@ export class VideoDataService {
     this.dataSource.next(data);
   }
 
-  public get() {
-    return of(true);
+  public updateElements(newItem: IElement) {
+    elements.push(newItem);
+  }
+
+  public getElements(): Observable<IElement[]> {
+    return of(elements)
   }
 }

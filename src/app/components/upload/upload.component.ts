@@ -1,10 +1,9 @@
-import {Component, DestroyRef, ElementRef, inject, OnInit, signal, ViewChild} from '@angular/core';
+import {Component, DestroyRef, inject, signal} from '@angular/core';
 import {VideoDataService} from '../../services/video-data.service';
 import {VideosComponent} from '../videos/videos.component';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
-import {elements} from '../../Mock/element-value';
+import {elements} from '../../mock/element-value';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
-import {of} from 'rxjs';
 
 @Component({
   selector: 'app-upload',
@@ -15,24 +14,12 @@ import {of} from 'rxjs';
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
 })
-export class UploadComponent implements OnInit{
+export class UploadComponent {
 
-  public videos = signal<IElement[]>([]);
   private dataTransferSvc = inject(VideoDataService);
-  public elements = signal<IElement[] | null>(null)
   private destroyRef = inject(DestroyRef);
   private vdSvc = inject(VideoDataService);
-
-  ngOnInit(): void {
-    this.getElement();
-  }
-
-  public getElement() {
-    this.vdSvc.get().pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(() => of(this.elements()))
-    this.elements.set(elements)
-  }
+  public elements = signal<IElement[]>([]);
 
   public onSelectFile(event: any) {
     const file = event.target.files && event.target.files[0];
@@ -40,22 +27,29 @@ export class UploadComponent implements OnInit{
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log(reader)
         if (reader.result) {
-          this.videos.update(() => {
-            return this.elements()!.map(item => {
-              return {
-                id: item.id,
-                verId: item.verId,
-                name: item.name,
-                video: reader.result,
-              }
-            });
-          });
-          this.dataTransferSvc.changeData(this.videos());
+          const lastItem = elements[elements.length - 1];
+          const newId = lastItem?.id !== undefined ? lastItem.id + 1 : 1;
+          const newItem = {
+            id: newId,
+            name: `${file.name}`,
+            username: newId,
+            video: reader.result,
+          };
+          this.vdSvc.updateElements(newItem);
+          this.getElements();
+          this.dataTransferSvc.changeData(this.elements());
         }
       }
-      // reader.readAsDataURL(file);
     }
   }
+
+  public getElements() {
+    this.vdSvc.getElements().pipe(
+      takeUntilDestroyed(this.destroyRef),
+    ).subscribe(res => {
+      this.elements.set(res);
+    })
+  }
+
 }
