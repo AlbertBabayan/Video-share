@@ -2,7 +2,7 @@ import {Component, DestroyRef, inject, signal} from '@angular/core';
 import {VideoDataService} from '../../services/video-data.service';
 import {VideosComponent} from '../videos/videos.component';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
-import {elements} from '../../mock/element-value';
+import {elements} from '../../mock/generated-elements';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({

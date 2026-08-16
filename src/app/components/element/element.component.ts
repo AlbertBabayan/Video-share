@@ -1,11 +1,7 @@
 import {Component, inject, input, signal, ViewChild} from '@angular/core';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
 import {SharedModalComponent} from '../shared-modal/shared-modal.component';
-import {JsonPipe} from '@angular/common';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
-import {MatMenu, MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'app-element',
@@ -13,9 +9,6 @@ import {MatMenu, MatMenuModule, MatMenuTrigger} from '@angular/material/menu';
   imports: [
     SharedModalComponent,
     ReactiveFormsModule,
-    MatFormField,
-    MatLabel,
-    MatInput
   ],
   templateUrl: './element.component.html',
   styleUrl: './element.component.scss'
