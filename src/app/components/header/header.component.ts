@@ -1,6 +1,5 @@
-import {Component, ElementRef, inject, signal, ViewChild} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
-import {VideoDataService} from '../../services/video-data.service';
 import {MatButtonModule} from '@angular/material/button';
 import {Router} from '@angular/router';
 
@@ -11,9 +10,15 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
-
+export class HeaderComponent implements OnInit {
   private router = inject(Router);
+  private navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+
+  ngOnInit() {
+    if (this.navigation?.type === 'reload') {
+      this.router.navigate(['/main']);
+    }
+  }
 
   public navigateToManage(): void {
     this.router.navigate(['manage']);

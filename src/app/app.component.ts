@@ -10,5 +10,4 @@ import {MainComponent} from './components/main/main.component';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'videoShare';
 }

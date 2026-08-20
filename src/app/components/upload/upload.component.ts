@@ -1,27 +1,25 @@
-import {Component, DestroyRef, inject, signal} from '@angular/core';
-import {VideoDataService} from '../../services/video-data.service';
-import {VideosComponent} from '../videos/videos.component';
+import {Component, inject, signal} from '@angular/core';
+import {RecordDataService} from '../../services/record-data.service';
+import {RecordComponent} from '../record/record.component';
 import {IElement} from '../../infrastructure/interfaces/element.interface';
 import {elements} from '../../mock/generated-elements';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
   imports: [
-    VideosComponent
+    RecordComponent
   ],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
 
-  private dataTransferSvc = inject(VideoDataService);
-  private destroyRef = inject(DestroyRef);
-  private vdSvc = inject(VideoDataService);
+  private dataTransferService = inject(RecordDataService);
+  private recordService = inject(RecordDataService);
   public elements = signal<IElement[]>([]);
 
-  public onSelectFile(event: any) {
+  public onFileSelect(event: any) {
     const file = event.target.files && event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -29,27 +27,21 @@ export class UploadComponent {
       reader.onload = () => {
         if (reader.result) {
           const lastItem = elements[elements.length - 1];
-          const newId = lastItem?.id !== undefined ? lastItem.id + 1 : 1;
+          const newId = lastItem ? lastItem.id + 1 : 1;
           const newItem = {
             id: newId,
             name: `${file.name}`,
-            username: newId,
-            video: reader.result,
+            username: `${file.name}`,
+            record: reader.result,
           };
-          this.vdSvc.updateElements(newItem);
-          this.getElements();
-          this.dataTransferSvc.changeData(this.elements());
+          this.recordService.updateElements(newItem);
+          this.elements.update(() => [
+            ...this.elements(),
+            newItem
+          ]);
+          this.dataTransferService.changeData(this.elements());
         }
       }
     }
   }
-
-  public getElements() {
-    this.vdSvc.getElements().pipe(
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe(res => {
-      this.elements.set(res);
-    })
-  }
-
 }

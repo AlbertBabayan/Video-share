@@ -1,5 +1,6 @@
 .container {
   width: 700px;
+  height: 700px;
 
   .inner {
     .elements-list-container {
@@ -29,6 +30,7 @@
             flex-direction: column;
             align-items: center;
             height: max-content;
+            padding: 5px;
             gap: 5px;
             border: 1px solid #879bf4;
             cursor: move;
@@ -42,6 +44,13 @@
               display: flex;
               justify-content: flex-end;
               width: 100%;
+
+              .edit-fields {
+                height: 22px;
+                width: 30px;
+                border-radius: 5px;
+                background-color: #879bf436;
+              }
             }
           }
         }

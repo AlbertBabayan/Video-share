@@ -1,0 +1,12 @@
+<div class="container">
+  <form [formGroup]="elementForm">
+    <div>
+      <input class="element-field" placeholder="name" formControlName="name">
+      <input class="element-field" placeholder="Username" formControlName="username">
+    </div>
+    <div>
+      <button (click)="save()" type="button">Save</button>
+      <button (click)="cancel()" type="button">Cancel</button>
+    </div>
+  </form>
+</div>
