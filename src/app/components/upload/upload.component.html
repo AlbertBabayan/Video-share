@@ -1,12 +1,151 @@
 <div class="container">
   <div class="inner">
     <div class="action">
-      <button class="action-info-button" type="button" (click)="myFileInput.click()">Upload Videos</button>
-      <input #myFileInput class="upload-input" type='file' (change)="onFileSelect($event)">
-      <button class="action-info-button" type="button" >Recent Uploads</button>
+<!--      <button class="action-info-button" type="button" (click)="myFileInput.click()">Upload Videos</button>-->
+      <button class="action-info-button" type="button" (click)="openUpload(myFileInput)">Upload Videos</button>
+      <input #myFileInput class="upload-input" type='file' accept="video/*" (change)="uploadVideos($event)">
+      <button class="action-info-button" type="button" (click)="recentUploads()">Recent Uploads</button>
     </div>
-    <div class="record">
-      <app-record></app-record>
+    @if(!canShowUploads()) {
+    <div class="drag-and-drop-container">
+      <div cdkDropListGroup class="elements-list-container">
+        <div class="element-container">
+          <div
+            cdkDropList
+            #todoElements="cdkDropList"
+            [cdkDropListData]="elements()"
+            [cdkDropListConnectedTo]="[itemsList]"
+            class="elements-list"
+            (cdkDropListDropped)="dropItem($event)">
+            @for (item of elements(); track item) {
+              <div class="draggable-item" cdkDrag>
+                <div class="record-container">
+                  <video class="record" controls>
+                    <source [src]=item.record type="video/mp4">
+                  </video>
+                </div>
+                <div class="info">
+                  <div class="info-label">
+                    Id
+                  </div>
+                  <div class="info-value">
+                    {{ item.id }}
+                  </div>
+                </div>
+                <div class="info">
+                  <div class="info-label">
+                    Name
+                  </div>
+                  <div class="info-value">
+                    {{ item.name }}
+                  </div>
+                </div>
+                <div class="info">
+                  <div class="info-label">
+                    Username
+                  </div>
+                  <div class="info-value">
+                    {{ item.username }}
+                  </div>
+                </div>
+                <div class="action-container">
+                  <button class="edit-fields" (click)="edit(item)" mat-raised-button>Edit</button>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="element-container">
+          <div
+            cdkDropList
+            #itemsList="cdkDropList"
+            [cdkDropListData]="items()"
+            [cdkDropListConnectedTo]="[todoElements]"
+            class="elements-list"
+            (cdkDropListDropped)="dropItem($event)">
+            @for (item of items(); track item) {
+              <div class="draggable-item" cdkDrag>
+                <div class="record-container">
+                  <video class="record" controls>
+                    <source [src]=item.record type="video/mp4">
+                  </video>
+                </div>
+                <div class="info">
+                  <div class="info-label">
+                    Id
+                  </div>
+                  <div class="info-value">
+                    {{ item.id }}
+                  </div>
+                </div>
+                <div class="info">
+                  <div class="info-label">
+                    Name
+                  </div>
+                  <div class="info-value">
+                    {{ item.name }}
+                  </div>
+                </div>
+                <div class="info">
+                  <div class="info-label">
+                    Username
+                  </div>
+                  <div class="info-value">
+                    {{ item.username }}
+                  </div>
+                </div>
+                <div class="action-container">
+                  <button class="edit-fields" (click)="edit(item)" mat-raised-button>Edit</button>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
     </div>
+    } @else {
+      <div class="recent-upload">
+        <div class="recent-upload-list-container">
+            <div class="recent-upload-container">
+              @for (item of elements(); track item) {
+                <div class="recent-upload-item" cdkDrag>
+                  <div class="record-container">
+                    <video class="record" controls>
+                      <source [src]=item.record type="video/mp4">
+                    </video>
+                  </div>
+                  <div class="info">
+                    <div class="info-label">
+                      Id
+                    </div>
+                    <div class="info-value">
+                      {{ item.id }}
+                    </div>
+                  </div>
+                  <div class="info">
+                    <div class="info-label">
+                      Name
+                    </div>
+                    <div class="info-value">
+                      {{ item.name }}
+                    </div>
+                  </div>
+                  <div class="info">
+                    <div class="info-label">
+                      Username
+                    </div>
+                    <div class="info-value">
+                      {{ item.username }}
+                    </div>
+                  </div>
+                  <div class="action-container">
+                    <button class="edit-fields" (click)="edit(item)" mat-raised-button>Edit</button>
+                  </div>
+                </div>
+              }
+            </div>
+        </div>
+      </div>
+    }
   </div>
 </div>
