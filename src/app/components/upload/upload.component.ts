@@ -6,7 +6,7 @@ import {Dialog} from '@angular/cdk/dialog';
 import {CustomDialogComponent} from '../custom-dialog/custom-dialog.component';
 import {
   CdkDragDrop,
- DragDropModule,
+  DragDropModule,
   moveItemInArray,
   transferArrayItem
 } from '@angular/cdk/drag-drop';
@@ -29,6 +29,7 @@ export class UploadComponent {
   public items = signal<IElement[]>([]);
   private dialog = inject(Dialog);
   public canShowUploads = signal<boolean>(false);
+
 
   public openUpload(input: HTMLInputElement) {
     this.canShowUploads.set(false);
@@ -55,7 +56,7 @@ export class UploadComponent {
       reader.onload = () => {
         if (reader.result) {
           const lastItem = elements[elements.length - 1];
-          const newId = lastItem ? lastItem.id + 1 : 1;
+          const newId = lastItem ? lastItem.id! + 1 : 1;
           const newItem = {
             id: newId,
             name: `${file.name}`,
@@ -83,16 +84,12 @@ export class UploadComponent {
       if (res) {
         this.elements.update(elements =>
           elements.map(element =>
-            element.id === res.id
-              ? {...res, record: element.record}
-              : element
+            element.id === res.id ? res : element
           )
         );
         this.items.update(items =>
           items.map(item =>
-            item.id === res.id
-              ? {...res, record: item.record}
-              : item
+            item.id === res.id ? res : item
           )
         );
       }

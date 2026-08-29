@@ -55,7 +55,9 @@
           padding: 10px;
 
           .elements-list {
-            display: grid;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
             height: 100%;
 
             .draggable-item {

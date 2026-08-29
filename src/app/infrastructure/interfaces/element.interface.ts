@@ -2,5 +2,5 @@ export interface IElement {
   id: number,
   name: string,
   username: string,
-  record?: string | ArrayBuffer | null;
+  record: string | ArrayBuffer | null;
 }
