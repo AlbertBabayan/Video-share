@@ -56,9 +56,9 @@ export class UploadComponent {
       reader.onload = () => {
         if (reader.result) {
           const lastItem = elements[elements.length - 1];
-          const newId = lastItem ? lastItem.id! + 1 : 1;
+          const createdId = lastItem ? lastItem.id + 1 : 1;
           const newItem = {
-            id: newId,
+            id: createdId,
             name: `${file.name}`,
             username: `${file.name}`,
             record: reader.result,

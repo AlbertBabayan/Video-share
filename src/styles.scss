@@ -14,8 +14,38 @@ body {
   .cdk-drag-placeholder {
     opacity: 0.3;
   }
+
   .cdk-drag-preview {
+    .record-container {
+      .record {
+        width: 100%;
+        height: 132px;
+      }
+    }
+
+    .info {
+      display: flex;
+      width: 100%;
+
+      .info-label {
+        display: flex;
+        justify-content: flex-start;
+        width: 35%;
+      }
+
+      .info-value {
+        display: flex;
+        justify-content: flex-start;
+        width: 65%;
+        color: #3d54bb;
+      }
+    }
+
     .action-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+
       .edit-fields {
         height: 22px;
         width: 30px;
