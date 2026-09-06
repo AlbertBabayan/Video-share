@@ -4,11 +4,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [ReactiveFormsModule, MatButtonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+    selector: 'app-header',
+    imports: [ReactiveFormsModule, MatButtonModule],
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
   private router = inject(Router);

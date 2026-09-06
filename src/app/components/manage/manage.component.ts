@@ -8,14 +8,13 @@ import {CustomDialogComponent} from '../custom-dialog/custom-dialog.component';
 import {Dialog} from '@angular/cdk/dialog';
 
 @Component({
-  selector: 'app-manage',
-  standalone: true,
-  templateUrl: './manage.component.html',
-  imports: [
-    MatCheckbox,
-    DatePipe
-  ],
-  styleUrl: './manage.component.scss'
+    selector: 'app-manage',
+    templateUrl: './manage.component.html',
+    imports: [
+        MatCheckbox,
+        DatePipe
+    ],
+    styleUrl: './manage.component.scss'
 })
 export class ManageComponent {
 

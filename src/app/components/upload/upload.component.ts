@@ -13,14 +13,13 @@ import {CustomDialogComponent} from '../custom-dialog/custom-dialog.component';
 import {Dialog} from '@angular/cdk/dialog';
 
 @Component({
-  selector: 'app-upload',
-  standalone: true,
-  imports: [
-    DragDropModule,
-    MatButton
-  ],
-  templateUrl: './upload.component.html',
-  styleUrl: './upload.component.scss'
+    selector: 'app-upload',
+    imports: [
+        DragDropModule,
+        MatButton
+    ],
+    templateUrl: './upload.component.html',
+    styleUrl: './upload.component.scss'
 })
 export class UploadComponent {
 

@@ -5,14 +5,13 @@ import {IElementItem} from '../../infrastructure/interfaces/element-item.interfa
 import {MatCheckbox} from '@angular/material/checkbox';
 
 @Component({
-  selector: 'app-custom-dialog',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatCheckbox
-  ],
-  templateUrl: './custom-dialog.component.html',
-  styleUrl: './custom-dialog.component.scss'
+    selector: 'app-custom-dialog',
+    imports: [
+        ReactiveFormsModule,
+        MatCheckbox
+    ],
+    templateUrl: './custom-dialog.component.html',
+    styleUrl: './custom-dialog.component.scss'
 })
 
 export class CustomDialogComponent {
