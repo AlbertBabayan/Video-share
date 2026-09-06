@@ -1,6 +1,13 @@
 <div class="container">
   <form [formGroup]="elementForm">
-    <div>
+    <div formGroupName="data">
+      <div>
+        <p>Select to change</p>
+        <section>
+          <p><mat-checkbox formControlName="name">Name</mat-checkbox></p>
+          <p><mat-checkbox formControlName="username">Username</mat-checkbox></p>
+        </section>
+      </div>
       <input class="element-field" placeholder="name" formControlName="name">
       <input class="element-field" placeholder="Username" formControlName="username">
     </div>

@@ -21,7 +21,7 @@
               <div class="draggable-item" cdkDrag>
                 <div class="record-container">
                   <video class="record" controls>
-                    <source [src]=item.record type="video/mp4">
+                    <source [src]="item.record" type="video/mp4">
                   </video>
                 </div>
                 <div class="info">
@@ -49,7 +49,7 @@
                   </div>
                 </div>
                 <div class="action-container">
-                  <button class="edit-fields" (click)="edit(item)" mat-raised-button>Edit</button>
+                  <button class="item-details" (click)="itemDetails(item)" mat-raised-button>Details</button>
                 </div>
               </div>
             }
@@ -67,7 +67,7 @@
               <div class="draggable-item" cdkDrag>
                 <div class="record-container">
                   <video class="record" controls>
-                    <source [src]=item.record type="video/mp4">
+                    <source [src]="item.record" type="video/mp4">
                   </video>
                 </div>
                 <div class="info">
@@ -95,7 +95,7 @@
                   </div>
                 </div>
                 <div class="action-container">
-                  <button class="edit-fields" (click)="edit(item)" mat-raised-button>Edit</button>
+                  <button class="item-details" (click)="itemDetails(item)" mat-raised-button>Details</button>
                 </div>
               </div>
             }
@@ -107,11 +107,11 @@
       <div class="recent-upload">
         <div class="recent-upload-list-container">
             <div class="recent-upload-container">
-              @for (item of elements(); track item) {
+              @for (item of allUploads(); track item) {
                 <div class="recent-upload-item">
                   <div class="record-container">
                     <video class="record" controls>
-                      <source [src]=item.record type="video/mp4">
+                      <source [src]="item.record" type="video/mp4">
                     </video>
                   </div>
                   <div class="info">
@@ -139,7 +139,7 @@
                     </div>
                   </div>
                   <div class="action-container">
-                    <button class="edit-fields" (click)="edit(item)" mat-raised-button>Edit</button>
+                    <button class="item-details" (click)="itemDetails(item)" mat-raised-button>Details</button>
                   </div>
                 </div>
               }

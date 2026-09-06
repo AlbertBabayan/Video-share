@@ -1,6 +1,20 @@
 body {
   margin: 0;
   background: #15213B;
+  font-family: sans-serif;
+
+  .mdc-checkbox__checkmark {
+    color: black;
+  }
+  .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background {
+    background: #879bf4 !important;
+    border-color: #879bf4 !important;
+  }
+
+  .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background {
+    background-color: #879bf4 !important;
+    border-color: #879bf4 !important;
+  }
 
   .draggable-item {
     display: flex;
@@ -16,11 +30,9 @@ body {
   }
 
   .cdk-drag-preview {
-    .record-container {
-      .record {
-        width: 100%;
-        height: 132px;
-      }
+    .record {
+      width: 100%;
+      height: 132px;
     }
 
     .info {

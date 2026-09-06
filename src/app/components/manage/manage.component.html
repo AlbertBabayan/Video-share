@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="search-bar">
+    <div class="title">
+      <span class="title-about">Manage Videos</span>
+      <span class="title-info">View, edit and organize your uploaded videos.</span>
+    </div>
+    <div class="search-input-container">
+      <input #product class="search-input" (keyup)="search(product.value)" type="text" placeholder="search videos...">
+    </div>
+  </div>
+  <div class="visual-view"></div>
+  <div class="dashboard">
+    @if (!filteredElements()) {
+      <span class="loader"></span>
+    } @else {
+      <div class="tab-header">
+        <div class="checkbox">
+          <section>
+            <mat-checkbox
+              [checked]="allChecked()"
+              [indeterminate]="someChecked()"
+              (change)="toggleAll($event.checked)"
+            >
+            </mat-checkbox>
+          </section>
+        </div>
+        <div class="record">
+          <span>Video</span>
+        </div>
+        <div class="duration">
+          <span>Duration</span>
+        </div>
+        <div class="size">
+          <span>Size</span>
+        </div>
+        <div class="last-modified-date">
+          <span>Last modified date</span>
+        </div>
+        <div class="actions">
+          <span>Actions</span>
+        </div>
+      </div>
+      <div class="element-container">
+        @for (item of filteredElements(); track item.id) {
+          <div class="element">
+            <div class="checkbox">
+              <section>
+                <mat-checkbox
+                  [checked]="item.completed"
+                  (change)="update(item.id, $event.checked)"
+                >
+                </mat-checkbox>
+              </section>
+            </div>
+            <div class="record-container">
+              <div class="record">
+                <video controls>
+                  <source [src]="item.record" type="video/mp4">
+                </video>
+              </div>
+              <div class="record-title">
+                <div class="record-username">
+                  {{ item.username }}
+                </div>
+                <div class="record-name">
+                  {{ item.name }}
+                </div>
+              </div>
+            </div>
+            <div class="duration">
+              {{ item.duration }}
+            </div>
+            <div class="size">
+              {{ item.size }}
+            </div>
+            <div class="last-modified-date">
+              {{ item.lastModifiedDate | date:"mediumDate" }}
+            </div>
+            <div class="actions">
+              <div class="remove">
+                <i class="ph ph-trash remove-icon" (click)="removeItem(item.id)"></i>
+              </div>
+              <div class="edit">
+                <i class="ph ph-pencil-simple-line edit-icon" (click)="editItem(item)"></i>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
