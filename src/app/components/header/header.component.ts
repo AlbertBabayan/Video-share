@@ -10,15 +10,15 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   private router = inject(Router);
-  // private navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+  private navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
 
-  // ngOnInit() {
-  //   if (this.navigation?.type === 'reload') {
-  //     this.router.navigate(['/main']);
-  //   }
-  // }
+  ngOnInit() {
+    if (this.navigation?.type === 'reload') {
+      this.router.navigate(['/main']);
+    }
+  }
 
   public navigateToManage() {
     this.router.navigate(['manage']);
